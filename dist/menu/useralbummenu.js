@@ -106,6 +106,7 @@ class UserAlbumMenu {
         this.albummanagement.updateById(id, album);
         for (let i = 0; i < currentUser.albums.length; i++) {
             if (id == currentUser.albums[i].id) {
+                album.id = currentUser.albums[i].id;
                 currentUser.albums[i] = album;
             }
         }
