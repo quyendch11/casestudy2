@@ -18,6 +18,8 @@ export class AlbumsManagement implements IAlbumsManagement {
     updateById(id: number, t: Albums): void{
         let index = this.findById(id);
         if(index != -1){
+            t.id = AlbumsManagement.albums[index].id;
+            t.song = AlbumsManagement.albums[index].song;
             AlbumsManagement.albums[index]=t;
         }
 

@@ -13,6 +13,8 @@ class AlbumsManagement {
     updateById(id, t) {
         let index = this.findById(id);
         if (index != -1) {
+            t.id = AlbumsManagement.albums[index].id;
+            t.song = AlbumsManagement.albums[index].song;
             AlbumsManagement.albums[index] = t;
         }
     }
