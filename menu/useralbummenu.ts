@@ -23,37 +23,37 @@ export class UserAlbumMenu{
     run(currentUser: User): void{
         let choice = -1;
         do{
-            console.log('----quan ly album----')
-            console.log('1. hien thi tat ca albums')
-            console.log('2. tao album moi')
-            console.log('3. sua album')
-            console.log('4. xoa album')
-            console.log('5. hien thi bai hat cua album')
-            console.log('0. thoat')
-            choice = +rl.question('chon de  ')
+            console.log('----Quản lý album----')
+            console.log('1. Hiển thị tất cả  albums')
+            console.log('2. Tạo album mới')
+            console.log('3. Chỉnh sửa album')
+            console.log('4. Xoá album')
+            console.log('5.Hiển thị bài hát của album')
+            console.log('0.Thoát')
+            choice = +rl.question('Mời nhập lựa chọn:  ')
             switch(choice) {
                 case albumchoice.SHOW_ALL_ALBUM:{
-                    console.log('tat ca album cua nguoi dung')
+                    console.log('-----Tất cả album của người dùng------')
                     this.showAllAlbums(currentUser)
                     break;
                 }
                 case albumchoice.ADD_NEW_ALBUM:{
-                    console.log('tao album moi')
+                    console.log('-----Tạo album mới-----')
                     this.showCreateAlbum(currentUser)
                     break;
                 }
                 case albumchoice.UPDATE_ALBUM:{
-                    console.log(' sua album')
+                    console.log('------Chỉnh sửa album-----')
                     this.updateAlbum(currentUser)
                     break;
                 }
                 case albumchoice.DELETE_ALBUM:{
-                    console.log(' xoa album')
+                    console.log('-----Xoá album-----')
                     this.deleteAlbum(currentUser)
                     break;
                 }
                 case albumchoice.SHOW_SONGIN_ALBUM:{
-                    console.log('hien thi bai hat cua album')
+                    console.log('-----Hiển thị bài hát của album------')
                     this.showSong()
                     break;
                 }
@@ -62,32 +62,32 @@ export class UserAlbumMenu{
         }while(choice !=0)1
     }
     showAllAlbums(currentUser:User) {
-        console.log('danh sach album nhac')
+        console.log('-----Danh sách album nhạc của bạn------')
         let albums = currentUser.albums
         for (let i = 0; i < albums.length; i++) {
-            console.log(`${albums[i].id},ten album: ${albums[i].name}\t `)
+            console.log(`ID: ${albums[i].id} ,Tên album: ${albums[i].name}\t `)
         }
     }
     addAlbum(){
-        let name = rl.question('nhap ten album  ') 
+        let name = rl.question('Nhập tên album:  ') 
         return new Albums(name)
     }
    
     showCreateAlbum(currentUser: User){
-        console.log('them album nhac ')
+        console.log('-----Thêm album nhạc-----')
         let album= this.addAlbum();
         this.albummanagement.createNew(album)
         currentUser.albums.push(album)
     }
     updateAlbum(currentUser: User){
-        console.log('sua album')
-        let id= +rl.question('nhap id album muon sua  ')
+        console.log('-------Chỉnh sửa album-----')
+        let id= +rl.question('Nhập ID album muốn sửa:  ')
         let album = this.addAlbum();
         this.albummanagement.updateById(id ,album)
         for(let i=0; i<currentUser.albums.length; i++){
             if(id == currentUser.albums[i].id){
-                album.id= currentUser.albums[i].id;
-                album.song= currentUser.albums[i].song;
+                album.id = currentUser.albums[i].id;
+                album.song = currentUser.albums[i].song;
                 currentUser.albums[i]=album
                 
             }
@@ -95,9 +95,9 @@ export class UserAlbumMenu{
         
     }
     deleteAlbum(currentUser: User){
-        console.log('xoa album')
-        let id= +rl.question('nhap id album muon xoa  ')
-        let question= +rl.question('hay chac muon xoa(nhap 1 de xoa 2 de thoi)  ')
+        console.log('-------Xoá album------')
+        let id= +rl.question('Nhập ID album muốn xoá:  ')
+        let question= +rl.question('Bạn chắc chắn muốn xoá(nhập 1 để xoá  2 để huỷ):  ')
         if(question == 1){
             this.albummanagement.removeById(id);
             for (let i = 0; i <currentUser.albums.length; i++) {
@@ -111,15 +111,15 @@ export class UserAlbumMenu{
         }    
     }
     showSong(){
-        console.log('---Hiển thị danh sách bai hat---');
+        console.log('---Hiển thị danh sách bài hát---');
                     let name = rl.question('Nhập tên album cần tìm:  ');
                     let album = this.albummanagement.findByName(name);
                     if (album) {
                         for (let i = 0; i < album.song.length; i++) {
-                            console.log(`${i+1},ten bai hat: ${album.song[i].name}\t ca sy trinh bay :${album.song[i].singer}\t nhac si:${album.song[i].writer}\t the loai: ${album.song[i].type}\t ngay phat hanh:${album.song[i].debuttime}`);
+                            console.log(`ID: ${i+1},Tên bài hát: ${album.song[i].name}\t Ca sĩ trình bày :${album.song[i].singer}\t Nhạc sĩ:${album.song[i].writer}\t Thể loại : ${album.song[i].type}\t Ngày phát hành:${album.song[i].debuttime}`);
                         }
                     } else {
-                        console.log('album không tồn tại!');
+                        console.log('-----Album không tồn tại!-----');
                     }
     }
    

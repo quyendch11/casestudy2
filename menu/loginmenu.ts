@@ -16,12 +16,12 @@ export class LoginMenu{
     run(){
         let choice = -1;
         do{
-            console.log("-----chao mung toi nhac cua tao-------")
-        console.log("-----vui long dang nhap-----")
-        console.log("1.dang nhap")
-        console.log("2. dang ky")
-        console.log("0. thoat")
-        choice = +rl.question('chon de:   ')
+            console.log("-----Chào mừng tới nhạc của  tao-------")
+        console.log("-----Vui lòng đăng nhập-----")
+        console.log("1.Đăng nhập")
+        console.log("2. Đăng ký")
+        console.log("0. Thoát")
+        choice = +rl.question('Vui lòng nhập lựa chọn:   ')
         switch(choice) {
             case LoginChoise.LOGIN:{
                 this.loginform();
@@ -36,18 +36,18 @@ export class LoginMenu{
         
     }
     loginform(){
-        let username = rl.question('nhap tai khoan:  ');
-        let password = rl.question('nhap mat khau:  ');
+        let username = rl.question('Nhập tài khoản:  ');
+        let password = rl.question('Nhập mật khẩu:  ');
         let currentUser = this.usermanagement.login(username, password);
         if(currentUser != null ){
-            console.log('--dang nhap dc roi day---');
+            console.log('-----Đăng nhập thành công-----');
             if (currentUser.role == Role.ADMIN) {
                 this.adminmenu.run();
             } else {
                this.userchoicemenu.run(currentUser);
             }
          }  else {
-            console.log('--Tài khoản hoặc mật khẩu không đúng!--');
+            console.log('----Tài khoản hoặc mật khẩu không đúng!-----');
         }
         
     }
@@ -71,11 +71,11 @@ export class LoginMenu{
         let email = '';
         let isValidEmail = true;
         do {
-            email = rl.question('Nhập email (abc@gmail.com):');
+            email = rl.question('Nhập email (abc@gmail.com): ');
             let regexForEmail: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
             if (!regexForEmail.test(email)) {
                 isValidEmail = false;
-                console.log('---Định dạng email không hợp lệ!---')
+                console.log('----Định dạng email không hợp lệ!----')
             } else {
                 isValidEmail = true;
                 let currentUser = this.usermanagement.findByEmail(email);
@@ -94,11 +94,11 @@ export class LoginMenu{
         let username = '';
         let isValidUsername = true;
         do {
-            username = rl.question('Nhap tai khoan:  ');
+            username = rl.question('Nhập tài khoản:  ');
             let currentUser = this.usermanagement.findByName(username);
             if (currentUser) {
                 isValidUsername = false;
-                console.log('----tai khoan co roi ma oi !----')
+                console.log('----Tài khoản đã tồn tại !----')
             } else {
                 isValidUsername = true;
             }
@@ -113,7 +113,7 @@ export class LoginMenu{
             password = rl.question('Nhập mật khẩu (Có 1 ký tự viết hoa, 1 viết thường, 1 ký tự đặc biệt và 1 số):  ');
             if (!regexForPassword.test(password)) {
                 isValidPassword = false;
-                console.log('mat khau nhập vào phải có ít nhất 1 ký tự thường 1 hoa 1 đặc biệt 1 số!')
+                console.log('Mật khẩu nhập vào phải có ít nhất 1 ký tự thường 1 hoa 1 đặc biệt 1 số!')
             } else {
                 isValidPassword = true;
             }
@@ -124,9 +124,9 @@ export class LoginMenu{
     inputConfirmPassword(password: string): void {
         let confirmPassword = '';
         do {
-            confirmPassword = rl.question('one more time baby:   ');
+            confirmPassword = rl.question('Vui lòng nhập lại mật khẩu:   ');
             if (password != confirmPassword) {
-                console.log('----sai roi cha----');
+                console.log('----Mật khẩu không đúng----');
             }
         } while (password != confirmPassword)
     }

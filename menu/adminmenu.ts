@@ -22,12 +22,12 @@ export class AdminMenu{
             console.log('---Ứng dụng quản lý WEB NHAC---')
             console.log('1. Quản lý bai hat')
             console.log('2. Quản lý album nhac')
-            console.log('3. quan ly ng dung')
+            console.log('3. quan ly người dùng')
             console.log('0. Đăng xuất')
             choice = +rl.question('Nhập lựa chọn:  ')
             switch (choice) {
                 case AdminChoice.SONG_MANAGEMENT: {
-                    console.log('---quan ly bai hat----')
+                    console.log('---Quản lý bài hát----')
                     this.song.run();
                     break;
                 }
@@ -37,7 +37,7 @@ export class AdminMenu{
                     break;
                 }
                 case AdminChoice.USER_MANAGEMENT:{
-                    console.log('---quan ly nguoi dung-----')
+                    console.log('---Quản lý người dùng-----')
                     this.user.run()
                     break;
 

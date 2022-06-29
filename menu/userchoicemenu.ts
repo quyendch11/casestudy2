@@ -16,19 +16,19 @@ export class UserChoiceMenu {
     run(currentUser:User){
         let choice = -1;
         do {
-            console.log('---nguoi dung---')
-        console.log('1. album')
-        console.log('2. bai hat ')
+            console.log('---Người dùng---')
+        console.log('1. Album')
+        console.log('2. Bài hát ')
         console.log('0. Đăng xuất')
-        choice = +rl.question('nhap lua chon ');
+        choice = +rl.question('Mời nhập lựa chọn: ');
         switch (choice) {
             case UserChoice.ALBUM_MANAGEMENT:{
-                console.log('quan ly album')
+                console.log('------Quản lý album-----')
                 this.album.run(currentUser);
                 break;
                 }
             case UserChoice.SONG_MANAGEMENT:{
-                console.log('quan ly bai hat')
+                console.log('-------Quản lý bài hát------')
                 this.song.run(currentUser);
                 break;
                 }

@@ -16,25 +16,25 @@ export class UserSongMenu{
     run(currentUser: User){
         let choice = -1;
         do{
-            console.log('----quan ly bai hat---')
-            console.log('1. hien thi tat ca bai hat')
-            console.log('2. them bai hat vao album')
-            console.log('3. xoa bai hat trong album')
-            console.log('0.thoat')
-            choice = +rl.question('chon de')
+            console.log('----Quản lý bài hát---')
+            console.log('1. Hiển thị tất cả bài hát')
+            console.log('2. Thêm bài hát vào album')
+            console.log('3. Xoá bài hát trong album')
+            console.log('0.Thoat')
+            choice = +rl.question('Mời nhập lựa chọn:  ')
             switch (choice) {
                 case SongChoise.SHOW_ALL_SONG:{
-                    console.log('ta ca bai hat cua web')
+                    console.log('-----Tât cả bài hát hiện có-----')
                     this.showAllSong();
                     break;
                 }
                 case SongChoise.ADD_SONG_TOALBUM:{
-                    console.log('them bai hat vao album')
+                    console.log('-----Thêm bài hát vào album-----')
                     this.addSongtoAlbum(currentUser)
                     break;
                 }
                 case SongChoise.DELETE_SONGINALBUM:{
-                    console.log('xoa bai hat trong album')
+                    console.log('------Xoá bài hát trong album-----')
                     this.deleteSongfromAlbum();
                     break;
                 }
@@ -43,52 +43,52 @@ export class UserSongMenu{
     }
 
     showAllSong(){
-        console.log('danh sach nhac')
+        console.log('-----Danh sách bài hát------')
         let songs = this.songmanagement.getAll();
         for (let i = 0; i < songs.length; i++) {
-            console.log(`${songs[i].id},ten bai hat: ${songs[i].name}\t ca sy trinh bay :${songs[i].singer}\t nhac si:${songs[i].writer}\t the loai: ${songs[i].type}\t ngay phat hanh:${songs[i].debuttime}`)
+            console.log(`Id: ${songs[i].id},Tên bài hát: ${songs[i].name}\t Ca sĩ trình bày: ${songs[i].singer}\t Nhạc sĩ: ${songs[i].writer}\t Thể loại: ${songs[i].type}\t Ngày phát hành: ${songs[i].debuttime}`)
         }
     }
 
     addSongtoAlbum(currentUser: User){
-        console.log('them bai hat vao album')
+        console.log('-----Thêm bài hát vào album------')
         let songs = this.songmanagement.getAll();
         let albums = this.albummanagement.getAll();
         if(albums.length == 0){
-            console.log('chua co album')
+            console.log('-----Hiện chưa có album nào-----')
             return ;
         }
         for (let i = 0; i < currentUser.albums.length; i++) {
-            console.log(`${i+1},ten album: ${currentUser.albums[i].name}\t `)
+            console.log(`ID: ${i+1},Tên album: ${currentUser.albums[i].name}\t `)
         }
-        let id = +rl.question('Nhập mã bai hat cần thêm vào album');
+        let id = +rl.question('Nhập mã ID bài hát muốn thêm vào album:  ');
         let songindex = this.songmanagement.findById(id);
         if (songindex == -1) {
-            console.log('Mã bai hat không tồn tại!');
+            console.log('ID bài hát không tồn tại!');
             return;
         } else {
-            let albumname = rl.question('Nhập tên album cần thêm:');
+            let albumname = rl.question('Nhập tên album cần thêm: ');
             let album = this.albummanagement.findByName(albumname);
             if (album) {
                 songs[songindex].albums = album
                 album.song.push(songs[songindex]);
             }else {
-                console.log('Tên album không tồn tại!');
+                console.log('-----Tên album không tồn tại!-----');
             }
             return;
         }
     }
 
     deleteSongfromAlbum(){
-        let albumname = rl.question('nhap ten album muon xoa bai hat  ')
+        let albumname = rl.question('Nhập tên album muốn xoá bài hát:   ')
         let album = this.albummanagement.findByName(albumname);
         if(album){
-            let songname = rl.question(' nhap ten bai hat muon xoa khoi album')
+            let songname = rl.question(' Nhập tên bài hát muốn xoá khỏi album:  ')
             for (let i = 0; i <album.song.length; i++){
                 if(songname == album.song[i].name){
                     album.song.splice(i, 1);
                 } else {
-                    console.log('bai hat khong co trong album')
+                    console.log('-----Bài hát không có trong album-----')
                 }
             }
         }
