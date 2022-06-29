@@ -87,6 +87,7 @@ export class UserAlbumMenu{
         for(let i=0; i<currentUser.albums.length; i++){
             if(id == currentUser.albums[i].id){
                 album.id= currentUser.albums[i].id;
+                album.song= currentUser.albums[i].song;
                 currentUser.albums[i]=album
                 
             }
